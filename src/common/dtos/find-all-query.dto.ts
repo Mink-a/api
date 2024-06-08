@@ -14,5 +14,6 @@ export class FindAllQueryDto {
 
   @IsString()
   @IsOptional()
+  @Transform((x) => (x.value === '' ? undefined : x.value))
   search?: string;
 }

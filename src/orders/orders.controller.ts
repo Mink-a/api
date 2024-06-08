@@ -24,6 +24,7 @@ export class OrdersController {
 
   @Get()
   findAll(@Query() query: FindAllQueryDto) {
+    console.log(query);
     return this.ordersService.findAll(query);
   }
 
