@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { PrismaService } from 'src/common/prisma/prisma.service';
 import { FindAllQueryDto } from 'src/common/dtos/find-all-query.dto';
+import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
 
+@UseGuards(JwtAuthGuard)
 @Injectable()
 export class OrdersService {
   constructor(private readonly prisma: PrismaService) {}
@@ -21,7 +23,6 @@ export class OrdersService {
     search = '',
     fromDate,
   }: FindAllQueryDto) {
-    console.log(page, limit, search, fromDate);
     const pageNum = page > 0 ? page - 1 : 0;
     const orders = await this.prisma.order.findMany({
       skip: pageNum * limit,

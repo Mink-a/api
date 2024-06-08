@@ -11,6 +11,9 @@ export class CreateOrderDto {
   @IsInt()
   id: number;
 
+  @IsInt()
+  userId: number;
+
   @IsNotEmpty()
   orderNumber: string;
 

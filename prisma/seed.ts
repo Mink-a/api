@@ -3,9 +3,23 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.user.create({
+    data: {
+      name: 'superadmin',
+      password: 'password',
+    },
+  });
+
+  await prisma.user.create({
+    data: {
+      name: 'admin',
+      password: 'password',
+    },
+  });
   // Inserting a single record with all fields
   await prisma.order.create({
     data: {
+      userId: 1,
       orderNumber: 'ORD1',
       description: 'Example  Description',
       price: 100,
@@ -22,6 +36,7 @@ async function main() {
   // Inserting another record with only required fields
   await prisma.order.create({
     data: {
+      userId: 1,
       orderNumber: 'ORD2',
       description: 'Another Example Description',
       price: 200,
