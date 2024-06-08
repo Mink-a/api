@@ -10,6 +10,12 @@ async function main() {
       description: 'Example  Description',
       price: 100,
       quantity: 2,
+      date: new Date(),
+      customerName: 'John Doe',
+      customerPhone: '+1234567890',
+      customerNotes: 'This is a note',
+      isSelfPickup: true,
+      deliveryAddress: '',
     },
   });
 
@@ -19,6 +25,12 @@ async function main() {
       orderNumber: 'ORD2',
       description: 'Another Example Description',
       price: 200,
+      quantity: 1,
+      date: new Date(),
+      customerName: 'Jane Doe',
+      customerPhone: '+9876543210',
+      isSelfPickup: false,
+      deliveryAddress: '456 Elm St',
     },
   });
 

@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class FindAllQueryDto {
   @IsNumber()
@@ -16,4 +16,18 @@ export class FindAllQueryDto {
   @IsOptional()
   @Transform((x) => (x.value === '' ? undefined : x.value))
   search?: string;
+
+  @IsOptional()
+  @IsDate()
+  @Transform(({ value }) => {
+    if (value) {
+      const currentDate = new Date(value);
+      currentDate.setHours(0);
+      currentDate.setMinutes(0);
+      currentDate.setSeconds(0);
+      currentDate.setMilliseconds(0);
+      return currentDate;
+    }
+  })
+  fromDate?: Date;
 }

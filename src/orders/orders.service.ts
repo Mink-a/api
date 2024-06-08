@@ -15,12 +15,23 @@ export class OrdersService {
     return { data: order };
   }
 
-  async findAll({ page = 0, limit = 10, search = '' }: FindAllQueryDto) {
+  async findAll({
+    page = 0,
+    limit = 10,
+    search = '',
+    fromDate,
+  }: FindAllQueryDto) {
+    console.log(page, limit, search, fromDate);
     const pageNum = page > 0 ? page - 1 : 0;
     const orders = await this.prisma.order.findMany({
       skip: pageNum * limit,
       take: +limit,
-      where: { description: { contains: search } },
+      where: {
+        description: { contains: search },
+        date: {
+          gt: fromDate && new Date(fromDate),
+        },
+      },
       orderBy: { createdAt: 'desc' },
     });
     const total = await this.prisma.order.count();

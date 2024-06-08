@@ -1,4 +1,11 @@
-import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsBoolean,
+  IsDate,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateOrderDto {
   @IsInt()
@@ -16,4 +23,24 @@ export class CreateOrderDto {
   @IsInt()
   @IsOptional()
   quantity: number = 1;
+
+  @IsDate()
+  date: Date;
+
+  @IsString()
+  customerName: string;
+
+  @IsString()
+  customerPhone: string;
+
+  @IsString()
+  @IsOptional()
+  customerNotes: string;
+
+  @IsBoolean()
+  isSelfPickup: boolean;
+
+  @IsString()
+  @IsOptional()
+  deliveryAddress: string;
 }
