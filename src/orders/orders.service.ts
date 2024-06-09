@@ -28,7 +28,13 @@ export class OrdersService {
       skip: pageNum * limit,
       take: +limit,
       where: {
-        description: { contains: search },
+        OR: [
+          { description: { contains: search } },
+          { customerName: { contains: search } },
+          { customerNotes: { contains: search } },
+          { customerPhone: { contains: search } },
+          { orderNumber: { contains: search } },
+        ],
         date: {
           gt: fromDate && new Date(fromDate),
         },
